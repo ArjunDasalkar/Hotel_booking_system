@@ -2,12 +2,15 @@ require("dotenv").config();
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { body, validationResult } = require("express-validator");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// MySQL Database Connection (Now using .env variables)
+// MySQL Database Connection
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -23,43 +26,78 @@ db.connect((err) => {
     console.log("Connected to MySQL database ✅");
 });
 
+// Middleware to verify JWT token
+const verifyToken = (req, res, next) => {
+    const token = req.header("Authorization");
+    if (!token) return res.status(401).json({ error: "Access denied" });
 
-// Test Route to Check Connection Between Frontend and Backend
-app.get("/api/test", (req, res) => {
-    res.json({ message: "Backend is connected to Frontend!" });
+    try {
+        const verified = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);
+        req.admin = verified; // Attach admin details to request
+        next();
+    } catch (err) {
+        res.status(400).json({ error: "Invalid token" });
+    }
+};
+
+// Admin Registration Route (One-time setup)
+app.post("/admin/register",
+    [
+        body("username").notEmpty().withMessage("Username is required"),
+        body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
+    ],
+    (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+
+        const { username, password } = req.body;
+        const hashedPassword = bcrypt.hashSync(password, 10);
+
+        const query = "INSERT INTO Admins (username, password) VALUES (?, ?)";
+        db.query(query, [username, hashedPassword], (err, result) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({ message: "Admin registered successfully!" });
+        });
+    }
+);
+
+// Admin Login Route
+app.post("/admin/login",
+    [
+        body("username").notEmpty().withMessage("Username is required"),
+        body("password").notEmpty().withMessage("Password is required"),
+    ],
+    (req, res) => {
+        const { username, password } = req.body;
+
+        const query = "SELECT * FROM Admins WHERE username = ?";
+        db.query(query, [username], (err, results) => {
+            if (err) return res.status(500).json({ error: err.message });
+            if (results.length === 0) return res.status(401).json({ error: "Invalid credentials" });
+
+            const admin = results[0];
+            if (!bcrypt.compareSync(password, admin.password))
+                return res.status(401).json({ error: "Invalid credentials" });
+
+            const token = jwt.sign({ id: admin.id, username: admin.username }, process.env.JWT_SECRET, { expiresIn: "72h" });
+            res.json({ message: "Login successful", token });
+        });
+    }
+);
+
+// Protected Route Example
+app.get("/admin/dashboard", verifyToken, (req, res) => {
+    res.json({ message: "Welcome to the admin dashboard", admin: req.admin });
 });
 
+// Import Routes
+const customersRouter = require("./routes/customers");
+const roomRoutes = require("./routes/rooms");
+const reservationRoutes = require("./routes/reservations");
 
-// API Route to Get All Rooms
-app.get("/rooms", (req, res) => {
-    db.query("SELECT * FROM Rooms", (err, result) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(result);
-    });
-});
-
-// API Route to Add a Customer
-app.post("/customers", (req, res) => {
-    const { name, email, phone, aadhaar } = req.body;
-    const query = "INSERT INTO Customers (name, email, phone, aadhaar) VALUES (?, ?, ?, ?)";
-    
-    db.query(query, [name, email, phone, aadhaar], (err, result) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json({ message: "Customer added successfully!", id: result.insertId });
-    });
-});
-
-// API Route to Make a Reservation
-app.post("/reservations", (req, res) => {
-    const { customer_id, room_id, check_in, check_out } = req.body;
-    
-    const query = "INSERT INTO Reservations (customer_id, room_id, check_in, check_out) VALUES (?, ?, ?, ?)";
-    
-    db.query(query, [customer_id, room_id, check_in, check_out], (err, result) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json({ message: "Reservation successful!", id: result.insertId });
-    });
-});
+app.use("/customers", verifyToken, customersRouter);  // Customers API (protected)
+app.use("/rooms", roomRoutes);
+app.use("/reservations", reservationRoutes);
 
 
 // Start Server
