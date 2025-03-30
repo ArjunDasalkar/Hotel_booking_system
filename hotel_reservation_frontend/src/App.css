@@ -1,0 +1,61 @@
+/* Reset margin & padding */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Make the entire app container take full height */
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Header and Navbar stay at the top */
+  .header, .navbar {
+    width: 100%;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  /* Navbar should be below the header */
+  .navbar {
+    top: 60px; /* Adjust based on header height */
+    background: #0056b3;
+  }
+  
+  /* Ensure the main content stretches to push footer down */
+  .main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;  /* Avoid header overlap */
+    padding-bottom: 60px; /* Avoid footer overlap */
+  }
+  
+  /* Footer is fixed at the bottom */
+  .footer {
+    width: 100%;
+    background: #007bff;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  

@@ -33,14 +33,14 @@ const verifyToken = (req, res, next) => {
 
     try {
         const verified = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);
-        req.admin = verified; // Attach admin details to request
+        req.admin = verified;
         next();
     } catch (err) {
         res.status(400).json({ error: "Invalid token" });
     }
 };
 
-// Admin Registration Route (One-time setup)
+// Admin Registration (Sign-Up)
 app.post("/admin/register",
     [
         body("username").notEmpty().withMessage("Username is required"),
@@ -61,7 +61,7 @@ app.post("/admin/register",
     }
 );
 
-// Admin Login Route
+// Admin Login
 app.post("/admin/login",
     [
         body("username").notEmpty().withMessage("Username is required"),
@@ -84,21 +84,6 @@ app.post("/admin/login",
         });
     }
 );
-
-// Protected Route Example
-app.get("/admin/dashboard", verifyToken, (req, res) => {
-    res.json({ message: "Welcome to the admin dashboard", admin: req.admin });
-});
-
-// Import Routes
-const customersRouter = require("./routes/customers");
-const roomRoutes = require("./routes/rooms");
-const reservationRoutes = require("./routes/reservations");
-
-app.use("/customers", verifyToken, customersRouter);  // Customers API (protected)
-app.use("/rooms", roomRoutes);
-app.use("/reservations", reservationRoutes);
-
 
 // Start Server
 const PORT = process.env.PORT || 5000;

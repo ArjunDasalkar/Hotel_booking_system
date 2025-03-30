@@ -1,0 +1,66 @@
+.rooms-container {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .rooms-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .room-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  
+  .room-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .room-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .room-number {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .room-status {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .book-btn {
+    background: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .book-btn:hover {
+    background: #0056b3;
+  }
+  
+  .book-btn.disabled {
+    background: gray;
+    cursor: not-allowed;
+  }
+  

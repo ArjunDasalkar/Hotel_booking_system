@@ -1,23 +1,30 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Rooms from "./pages/Rooms";
+import Booking from "./pages/Booking";
+import Admin from "./pages/Admin";
+import "./App.css"
+
+const PrivateRoute = ({ element }) => {
+  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+  return isAuthenticated ? element : <Navigate to="/" />;
+};
 
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    axios.get("http://localhost:5000/api/test")
-      .then(response => {
-        setMessage(response.data.message);
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-
   return (
-    <div className="text-center text-white bg-black h-screen flex items-center justify-center">
-      <h1 className="text-2xl">Backend Response: {message}</h1>
-    </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Admin />} /> {/* Admin is now the default page */}
+        <Route path="/home" element={<Home />} />
+        <Route path="/rooms" element={<Rooms />} />
+        <Route path="/booking" element={<Booking />} />
+      </Routes>
+      <Footer />
+    </Router>
   );
 }
 
