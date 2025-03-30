@@ -16,7 +16,7 @@ A **backend API** built with **Node.js, Express, and MySQL** for managing hotel 
 
 ### **1️⃣ Clone the Repository**
 ```bash
-git clone https://github.com/your-username/hotel_reservation_backend.git
+git clone https://github.com/ArjunDasalkar/Hotel_booking_system.git
 cd hotel_reservation_backend
 ```
 
@@ -102,6 +102,9 @@ _(All `GET` requests support sorting via query parameters: `?sort_by=column_name
 ## **👨‍💻 Developed By**
 🚀 **MustangD**  
 📌 **GitHub:** [ArjunDasalkar](https://github.com/ArjunDasalkar)  
+
+🚀 **Aryan Shastri**  
+📌 **GitHub:** [AryanShastri](https://github.com/AryanShastri)
 
 ---
 
