@@ -1,66 +1,156 @@
 .rooms-container {
-    text-align: center;
-    padding: 40px 20px;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
-  .rooms-grid {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .room-card {
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
-    transition: transform 0.2s;
-  }
-  
-  .room-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .room-price {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #007bff;
-  }
-  
-  .room-number {
-    font-size: 1rem;
-    color: #666;
-  }
-  
-  .room-status {
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
-  .book-btn {
-    background: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
-  }
-  
-  .book-btn:hover {
-    background: #0056b3;
-  }
-  
-  .book-btn.disabled {
-    background: gray;
-    cursor: not-allowed;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 20px;
+}
+
+.room-list {
+  width: 65%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.room-card {
+  width: 200px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.unavailable {
+  background-color: #ffdddd;
+}
+
+.book-button {
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.book-button:hover {
+  background-color: #0056b3;
+}
+
+.book-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.booking-sidebar {
+  width: 30%;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.booking-details {
+  padding: 25px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #555;
+}
+
+.detail-value {
+  font-weight: 500;
+}
+
+.customer-form {
+  margin-top: 25px;
+}
+
+.customer-form h3 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.3em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.customer-form label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.customer-form input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.customer-form input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+.confirm-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.confirm-button:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+}
+
+.booking-success {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.thank-you-message {
+  font-size: 1.3em;
+  color: #28a745;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.confirmation-details {
+  color: #555;
+  font-size: 0.95em;
+  line-height: 1.5;
+}
