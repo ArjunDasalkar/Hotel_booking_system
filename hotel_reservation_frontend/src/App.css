@@ -33,7 +33,7 @@ body, html {
   /* Navbar should be below the header */
   .navbar {
     top: 60px; /* Adjust based on header height */
-    background: #0056b3;
+    background: #030f1c;
   }
   
   /* Ensure the main content stretches to push footer down */

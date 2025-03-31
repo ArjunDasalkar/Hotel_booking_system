@@ -39,7 +39,7 @@ const Rooms = () => {
       <header className="app-header">
         <h1>Hotel Booking System</h1>
         <nav className="app-nav">
-          <a href="#">Home</a>
+          <a  href="#">Home</a>
           <a href="#">Rooms</a>
           <a href="#">Booking</a>
           <a href="#">Admin</a>

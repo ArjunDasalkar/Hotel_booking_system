@@ -8,10 +8,10 @@ const Header = () => {
   return (
     <header className="header">
       <h1>Hotel Booking System</h1>
-      <nav>
+      <nav class="nav">
         <Link to="/">Home</Link>
         <Link to="/rooms">Rooms</Link>
-        <Link to="/booking">Booking</Link>
+        {/* <Link to="/booking">Booking</Link> */}
         {!token && <Link to="/admin">Admin</Link>} {/* Hide if logged in */}
       </nav>
     </header>

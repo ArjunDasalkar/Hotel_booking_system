@@ -1,14 +1,58 @@
+
 .header {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: #eeff00;
-    color: white;
-    padding: 15px 0;
+  background-color: #502c37; /* Dark blue-gray background */
+  color: white;
+  padding: 20px 40px; /* Added more padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Style the navigation bar */
+.nav {
+  display: flex;
+  gap: 50px; /* Increased spacing between links */
+}
+
+/* Style the navigation links */
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 20px; /* More padding for clickable area */
+  border-radius: 5px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+/* Hover effect */
+.nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
     text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    z-index: 1000;
+    padding: 20px;
   }
-  
+
+  .nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .nav a {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+  }
+}
