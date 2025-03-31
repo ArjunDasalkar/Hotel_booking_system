@@ -1,6 +1,43 @@
 import React, { useState } from "react";
 import "./Rooms.css";
 
+const handleConfirmBooking = async () => {
+  if (!customerInfo.idNumber || !customerInfo.name || !customerInfo.email || !customerInfo.phone) {
+    alert("Please fill in all details.");
+    return;
+  }
+
+  const bookingDetails = {
+    name: customerInfo.name,
+    email: customerInfo.email,
+    phone: customerInfo.phone,
+    room_number: selectedRoom.room_number,  // Correct property to match backend
+  };
+
+  try {
+    const response = await fetch("http://localhost:5000/book-room", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookingDetails),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      alert("Booking successful! ✅");
+      setIsBooked(true); // Show success message in UI
+      window.location.reload(); // Refresh to update room availability
+    } else {
+      alert(data.error);
+    }
+  } catch (error) {
+    console.error("Error booking room:", error);
+    alert("Something went wrong.");
+  }
+};
+
+
 const Rooms = () => {
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [customerInfo, setCustomerInfo] = useState({

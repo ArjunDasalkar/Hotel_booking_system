@@ -19,12 +19,12 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   text-align: center;
-  background-color: #f9f9f9;
+  background-color: #2df804;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .unavailable {
-  background-color: #ffdddd;
+  background-color: #f40404;
 }
 
 .book-button {
@@ -59,7 +59,7 @@
   padding: 25px;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: #ff6f00;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
