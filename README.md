@@ -106,6 +106,9 @@ _(All `GET` requests support sorting via query parameters: `?sort_by=column_name
 🚀 **Aryan Shastri**  
 📌 **GitHub:** [AryanShastri](https://github.com/AryanShastri)
 
+🚀 **Aditya Raut**  
+📌 **GitHub:** [AdityaRaut](https://github.com/Adityaraut67)
+
 ---
 
 ## **💡 Future Enhancements**
